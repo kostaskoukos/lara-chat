@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      @vite(['resources/css/app.css'])
-    </head>
-    <body class="antialiased">
-        <button class="btn btn-warning btn-outline"><a href="/">lalallalalalal</a></button>
-    </body>
+    <title>Laravel</title>
+
+    @vite(['resources/css/app.css'])
+</head>
+
+<body class="antialiased">
+    @auth
+        Your username is {{ auth()->user()->name }}
+    @endauth
+    <form action="/logout" method="post">
+        @csrf
+        <button type="submit" class="btn btn-warning inline">Logout</button>
+    </form>
+</body>
+
 </html>
