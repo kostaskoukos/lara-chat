@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -17,13 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'web'])->group(function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('chat');
-
-    Route::post('/', function () {
-        return view('welcome');
-    })->name('send');
+    Route::controller(ChatController::class)->group(function () {
+        Route::get('/', 'show');
+        Route::post('/', 'store');
+    });
 });
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
