@@ -9,7 +9,9 @@ class ChatController extends Controller
 {
     public function show()
     {
-        return view('chat');
+        return view('chat', [
+            'messages' => Message::with('user')->get()
+        ]);
     }
 
     public function store(Request $req)
