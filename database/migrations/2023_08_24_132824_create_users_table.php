@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('id');
             $table->string('name');
             $table->string('googleid')->unique()->nullable();
+            $table->string('avatar_url')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

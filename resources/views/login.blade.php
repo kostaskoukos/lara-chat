@@ -5,5 +5,6 @@
         Password <input required type="password" name="password">
         Remember <input type="checkbox" name="remember">
         <button type="submit">Login</button>
+        <x-googleauth />
     </form>
 </x-layout>

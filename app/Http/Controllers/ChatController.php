@@ -23,6 +23,6 @@ class ChatController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        return view('chat');
+        return redirect('/');
     }
 }

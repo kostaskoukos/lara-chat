@@ -6,5 +6,6 @@
         Password<input required type="password" name="password">
         Password Confirm<input required type="password" name="password_confirmation">
         <button type="submit">Register</button>
+        <x-googleauth />
     </form>
 </x-layout>
