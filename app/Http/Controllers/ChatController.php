@@ -25,6 +25,6 @@ class ChatController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        return redirect('/');
+        return view('msg', ['msg' => $msg])->render();
     }
 }

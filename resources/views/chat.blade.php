@@ -5,13 +5,13 @@
     @auth
         Your username is {{ $user->name }}
     @endauth
-    <ol>
+    <ol id="msgs" x-arrange="append">
         @foreach ($messages as $msg)
             <li class="list-disc {{ $msg->user->id == $user->id ? 'uppercase bg-lime-700' : '' }}">{{ $msg->content }} -
                 {{ $msg->user->name }}</li>
         @endforeach
     </ol>
-    <form action="/" method="post">
+    <form action="/" method="post" x-target="msgs">
         @csrf
         <input required type="text" name="content">
         <button type="submit">Send</button>
