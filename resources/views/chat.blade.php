@@ -7,8 +7,7 @@
     @endauth
     <ol id="msgs" x-arrange="append">
         @foreach ($messages as $msg)
-            <li class="list-disc {{ $msg->user->id == $user->id ? 'uppercase bg-lime-700' : '' }}">{{ $msg->content }} -
-                {{ $msg->user->name }}</li>
+            <x-message :mine="$msg->user->id == $user->id" :name="$msg->user->name">{{ $msg->content }}</x-message>
         @endforeach
     </ol>
     <form action="/" method="post" x-target="msgs" x-data @@ajax:success="$el.reset()">
