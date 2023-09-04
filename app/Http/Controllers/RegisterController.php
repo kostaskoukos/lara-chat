@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -13,19 +13,20 @@ class RegisterController extends Controller
         return view('register');
     }
 
-    public function register(Request $req)
+    public function register(RegisterRequest $req)
     {
-        $req->validate([
-            'name' => ['required', 'string', 'max:225'],
-            'email' => ['required', 'string', 'email', 'max:225', 'unique:users'],
-            'password' => ['required', 'string', 'confirmed', 'min:8'],
-        ]);
+        $values = $req->validated();
 
         $user = User::create([
-            'name' => $req->name,
-            'email' => $req->email,
-            'password' => Hash::make($req->password)
+            'name' => $values['name'],
+            'email' => $values['email'],
+            'password' => Hash::make($values['password'])
         ]);
+
+        if (!isset($user))
+            return back()
+                ->withInput()
+                ->withErrors(['attempt' => "couldn't create user"]);
 
         auth()->login($user);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -11,21 +12,9 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(Request $req)
+    public function login(LoginRequest $req)
     {
-        $req->validate([
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
-            'remember' => ['nullable', 'string']
-        ]);
-
-        if (auth()->attempt(['email' => $req->email, 'password' => $req->password], $req->remember)) {
-
-            $req->session()->regenerate();
-            return redirect()->intended('/');
-        }
-
-        return back();
+        return $req->authenticate();
     }
 
     public function logout(Request $req)
